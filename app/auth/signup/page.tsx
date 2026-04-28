@@ -240,7 +240,7 @@ export default function SignUpPage() {
     }
   }
 
-  const field = (name: keyof typeof formData, label: string, type = 'text', placeholder = '') => (
+  const field = (name: keyof typeof formData, label: string, type = 'text', placeholder = '', autoComplete = 'off') => (
     <div>
       <label className={`text-xs font-medium block mb-1 ${isInvalid(name) ? 'text-red-500' : 'text-gray-500'}`}>
         {label} <span className="text-red-500">*</span>
@@ -252,6 +252,7 @@ export default function SignUpPage() {
         value={formData[name]}
         onChange={handleChange}
         onBlur={handleBlur}
+        autoComplete={autoComplete}
         className={`w-full border rounded-lg px-3 py-2 text-sm focus:outline-none transition-colors ${getBorderColor(name)}`}
       />
     </div>
