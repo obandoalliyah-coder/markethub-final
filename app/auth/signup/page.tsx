@@ -9,27 +9,75 @@ import { signIn } from 'next-auth/react'
 const MARINDUQUE_DATA = {
   "Boac": {
     zip: "4900",
-    barangays: ["Agos", "Antipolo", "Badias", "Balagbag", "Balanacan (Poblacion)", "Bantad", "Baybay Bajo", "Baybay Ibinanga", "Baybayanan", "Binoboy", "Buliasnin", "Catubtub", "Cawit", "Dawis", "Libtang", "Lupac", "Mabuhay", "Maligaya", "Mapote", "Marcos", "Matanding", "Murallon (Poblacion)", "Ogbac", "Pawa", "Pili", "Poctoy", "Poras", "Putting Buhangin", "Puyog", "Sabong", "San Miguel (Poblacion)", "Santol", "Sawi", "Tabi", "Tabigue", "Tanza"]
+    barangays: [
+      "Agot", "Agumaymayan", "Amoingon", "Apitong", "Balagasan", "Balaring",
+      "Balimbing", "Balogo", "Bamban", "Bangbangalon", "Bantad", "Bantay",
+      "Bayuti", "Binunga", "Boi", "Boton", "Buliasnin", "Bunganay", "Caganhao",
+      "Canat", "Catubugan", "Cawit", "Daig", "Daypay", "Duyay", "Hinapulan",
+      "Ihatub", "Isok I (Poblacion)", "Isok II (Poblacion)", "Laylay", "Lupac",
+      "Mahinhin", "Mainit", "Malbog", "Maligaya", "Malusak (Poblacion)",
+      "Mansiwat", "Mataas na Bayan (Poblacion)", "Maybo", "Mercado (Poblacion)",
+      "Murallon (Poblacion)", "Ogbac", "Pawa", "Pili", "Poctoy", "Poras",
+      "Putting Buhangin", "Puyog", "Sabong", "San Miguel (Poblacion)", "Santol",
+      "Sawi", "Tabi", "Tabigue", "Tagwak", "Tambunan", "Tampus (Poblacion)",
+      "Tanza", "Tugos", "Tumagabok", "Tumapon"
+    ]
   },
   "Buenavista": {
     zip: "4904",
-    barangays: ["Bacoro", "Bagacay", "Banuyo", "Belarmino", "Budbudin", "Cabugao", "Dayan", "Gabion", "Malapay", "Mangiliol", "Masiga", "Poblacion", "Sabang", "Tagum", "Yaw-Yaw"]
+    barangays: [
+      "Bagacay", "Bagtingon", "Barangay I (Poblacion)", "Barangay II (Poblacion)",
+      "Barangay III (Poblacion)", "Barangay IV (Poblacion)", "Bicas-bicas",
+      "Caigangan", "Daykitin", "Libas", "Malbog", "Sihi", "Timbo (Sanggulong)",
+      "Tungib-Lipata", "Yook"
+    ]
   },
   "Gasan": {
     zip: "4905",
-    barangays: ["Bacong-Bacong", "Bacong-Bukal", "Bangkal", "Banotbot", "Caigangan", "Dalaguete", "Dili", "Gabao", "Gogon", "Libtang", "Mahunod", "Malaruhat", "Mangiliol", "Marcos", "Napaan", "Pinggan", "Poblacion", "Tabionan", "Talao", "Taliongtiong", "Tamao", "Tiguion", "Uson"]
+    barangays: [
+      "Antipolo", "Bachao Ibaba", "Bachao Ilaya", "Bacong-Bacong", "Bahi",
+      "Bangbang", "Banot", "Banuyo", "Bognuyan", "Cabugao", "Dawis", "Dili",
+      "Libtangin", "Mahunig", "Mangiliol", "Masiga", "Matandang Gasan", "Pangi",
+      "Pinggan", "Tabionan", "Tapuyan", "Tiguion", "Barangay I (Poblacion)",
+      "Barangay II (Poblacion)", "Barangay III (Poblacion)"
+    ]
   },
   "Mogpog": {
     zip: "4901",
-    barangays: ["Argao", "Balanacan", "Ino", "Janagdong", "Lamesa", "Laon", "Magapua", "Malayak", "Malusak", "Mampaitan", "Mangyan-Mababad", "Poblacion", "Silangan", "Sumangga", "Tarug", "Villa Mendez"]
+    barangays: [
+      "Anapog-Sibucao", "Argao", "Balanacan", "Banto", "Bintakay", "Bocboc",
+      "Butansapa", "Candahon", "Capayang", "Danao", "Dulong Bayan (Poblacion)",
+      "Gitnang Bayan (Poblacion)", "Guisian", "Hinadharan", "Hinanggayon", "Ino",
+      "Janagdong (Planned Poblacion Expansion)", "Lamesa", "Laon", "Magapua",
+      "Malayak", "Malusak", "Mampaitan", "Mangyan-Mababad", "Market Site (Poblacion)",
+      "Mataas Na Bayan (Poblacion)", "Mendez", "Nangka I (Planned Poblacion Expansion)",
+      "Nangka II", "Paye", "Pili", "Puting Buhangin", "Sayao", "Silangan",
+      "Sumangga", "Tarug", "Villa Mendez (Poblacion)"
+    ]
   },
   "Santa Cruz": {
     zip: "4902",
-    barangays: ["Alobo", "Angas", "Aturan", "Bagong Silang Poblacion", "Baguidbirin", "Matalaba", "Mongpong", "Morales", "Napo", "Pag-asa Poblacion", "Pantayin", "Polo", "Pulong-Parang", "Punong"]
+    barangays: [
+      "Alobo", "Angas", "Aturan", "Bagong Silang Poblacion (2nd Zone)", "Baguidbirin",
+      "Baliis", "Balogo", "Banahaw Poblacion (3rd Zone)", "Bangcuangan", "Banogbog",
+      "Biga", "Botilao", "Buyabod", "Dating Bayan", "Devilla", "Dolores", "Haguimit",
+      "Hupi", "Ipil", "Jolo", "Kaganhao", "Kalangkang", "Kamandugan", "Kasily",
+      "Kilo-kilo", "Kinyaman", "Labo", "Lamesa", "Landy (Perez)",
+      "Lapu-lapu Poblacion (5th Zone)", "Libjo", "Lipa", "Lusok",
+      "Maharlika Poblacion (1st Zone)", "Makulapnit", "Maniwaya", "Manlibunan",
+      "Masaguisi", "Masalukot", "Matalaba", "Mongpong", "Morales", "Napo (Malabon)",
+      "Pag-Asa Poblacion (4th Zone)", "Pantayin", "Polo", "Pulong-Parang", "Punong",
+      "San Antonio", "San Isidro", "Tagum", "Tamayo", "Tambangan", "Tawiran", "Taytay"
+    ]
   },
   "Torrijos": {
     zip: "4903",
-    barangays: ["Agogoo", "Amoingon", "Bahi", "Buenavista", "Cabuyao", "Candahon", "Dawis", "Del Carmen", "Green Village", "Mabuhay", "Malakas", "Marlanga", "Paynosa", "Poblacion", "San Andres B.", "San Andres V.", "San Isidro", "San Jose", "San Roque", "Santa Cruz", "Santo Cristo", "Semirara", "Suha", "Tabionan", "Tagumpay", "Tambunan", "Tiguion"]
+    barangays: [
+      "Bangwayin", "Bayakbakin", "Bolo", "Bonliw", "Buangan", "Cabuyo", "Cagpo",
+      "Dampulan", "Kay Duke", "Mabuhay", "Makawayan", "Malibago", "Malinao",
+      "Maranlig", "Marlangga", "Matuyatuya", "Nangka", "Pakaskasan", "Payanas",
+      "Poblacion", "Poctoy", "Sibuyao", "Suha", "Talawan", "Tigwi"
+    ]
   }
 }
 
@@ -78,7 +126,8 @@ export default function SignUpPage() {
       if (n === 'email') return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email);
       if (n === 'password') return formData.password.length < 8;
       if (n === 'confirmPassword') return formData.password !== formData.confirmPassword;
-      return !formData[n];
+      if (n === 'contactNumber') return !/^09\d{9}$/.test(formData.contactNumber);
+      return !formData[n] || (typeof formData[n] === 'string' && formData[n].trim() === '');
     }
     return getInvalidStatus(name);
   }
@@ -95,7 +144,7 @@ export default function SignUpPage() {
 
     if (step === 1) {
       fieldsToTouch = ['name', 'email', 'password', 'confirmPassword'];
-      const hasEmpty = !formData.name || !formData.email || !formData.password || !formData.confirmPassword;
+      const hasEmpty = !formData.name.trim() || !formData.email.trim() || !formData.password || !formData.confirmPassword;
       const invalidEmail = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
       const invalidPass = formData.password.length < 8
       const mismatch = formData.password !== formData.confirmPassword
@@ -113,12 +162,16 @@ export default function SignUpPage() {
       }
     } else if (step === 2) {
       fieldsToTouch = ['ownerName', 'contactNumber', 'businessName', 'businessType'];
-      if (!formData.ownerName || !formData.contactNumber || !formData.businessName || !formData.businessType) {
+      const invalidContact = !/^09\d{9}$/.test(formData.contactNumber);
+      const hasEmptyStep2 = !formData.ownerName.trim() || !formData.contactNumber.trim() || !formData.businessName.trim() || !formData.businessType;
+      
+      if (hasEmptyStep2 || invalidContact) {
         setTouched(prev => ({
           ...prev,
           ownerName: true, contactNumber: true, businessName: true, businessType: true
         }))
-        setError('Please fill in all business details.')
+        if (hasEmptyStep2) setError('Please fill in all business details.')
+        else if (invalidContact) setError('Please provide a valid 11-digit mobile number starting with 09.')
         return
       }
     }
@@ -146,7 +199,7 @@ export default function SignUpPage() {
 
     setError('')
     
-    if (!formData.address || !formData.barangay || !formData.municipality || !formData.province || !formData.zipCode) {
+    if (!formData.address.trim() || !formData.barangay || !formData.municipality || !formData.province || !formData.zipCode) {
       setTouched(prev => ({
         ...prev,
         address: true, barangay: true, municipality: true, province: true, zipCode: true
@@ -205,8 +258,12 @@ export default function SignUpPage() {
   )
 
   const availableBarangays = formData.municipality && MARINDUQUE_DATA[formData.municipality as keyof typeof MARINDUQUE_DATA] 
-    ? MARINDUQUE_DATA[formData.municipality as keyof typeof MARINDUQUE_DATA].barangays 
+    ? [...MARINDUQUE_DATA[formData.municipality as keyof typeof MARINDUQUE_DATA].barangays].sort((a, b) => a.localeCompare(b))
     : []
+
+  const isStep1Filled = formData.name.trim() !== '' && formData.email.trim() !== '' && formData.password !== '' && formData.confirmPassword !== '';
+  const isStep2Filled = formData.ownerName.trim() !== '' && formData.contactNumber.trim() !== '' && formData.businessName.trim() !== '' && formData.businessType !== '';
+  const isStep3Filled = formData.address.trim() !== '' && formData.municipality !== '' && formData.barangay !== '';
 
   return (
     <div
@@ -429,15 +486,16 @@ export default function SignUpPage() {
               <button
                 type="button"
                 onClick={handleNext}
-                className="w-full bg-[#1e4d2b] hover:bg-[#2d6a4f] text-white font-semibold py-2.5 rounded-lg transition-colors text-sm"
+                disabled={(step === 1 && !isStep1Filled) || (step === 2 && !isStep2Filled)}
+                className="w-full bg-[#1e4d2b] hover:bg-[#2d6a4f] text-white font-semibold py-2.5 rounded-lg transition-colors text-sm disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 Next
               </button>
             ) : (
               <button
                 type="submit"
-                disabled={loading}
-                className="w-full bg-[#1e4d2b] hover:bg-[#2d6a4f] text-white font-semibold py-2.5 rounded-lg transition-colors disabled:opacity-60 text-sm"
+                disabled={loading || !isStep3Filled}
+                className="w-full bg-[#1e4d2b] hover:bg-[#2d6a4f] text-white font-semibold py-2.5 rounded-lg transition-colors disabled:opacity-60 disabled:cursor-not-allowed text-sm"
               >
                 {loading ? 'Creating account...' : 'Create Account'}
               </button>
