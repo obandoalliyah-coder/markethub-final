@@ -7,6 +7,81 @@ import { Camera, Save, User, Lock, Trash2, Store, MapPin, UploadCloud } from 'lu
 import { toast } from 'sonner'
 import Link from 'next/link'
 
+const MARINDUQUE_DATA = {
+  "Boac": {
+    zip: "4900",
+    barangays: [
+      "Agot", "Agumaymayan", "Amoingon", "Apitong", "Balagasan", "Balaring",
+      "Balimbing", "Balogo", "Bamban", "Bangbangalon", "Bantad", "Bantay",
+      "Bayuti", "Binunga", "Boi", "Boton", "Buliasnin", "Bunganay", "Caganhao",
+      "Canat", "Catubugan", "Cawit", "Daig", "Daypay", "Duyay", "Hinapulan",
+      "Ihatub", "Isok I (Poblacion)", "Isok II (Poblacion)", "Laylay", "Lupac",
+      "Mahinhin", "Mainit", "Malbog", "Maligaya", "Malusak (Poblacion)",
+      "Mansiwat", "Mataas na Bayan (Poblacion)", "Maybo", "Mercado (Poblacion)",
+      "Murallon (Poblacion)", "Ogbac", "Pawa", "Pili", "Poctoy", "Poras",
+      "Putting Buhangin", "Puyog", "Sabong", "San Miguel (Poblacion)", "Santol",
+      "Sawi", "Tabi", "Tabigue", "Tagwak", "Tambunan", "Tampus (Poblacion)",
+      "Tanza", "Tugos", "Tumagabok", "Tumapon"
+    ]
+  },
+  "Buenavista": {
+    zip: "4904",
+    barangays: [
+      "Bagacay", "Bagtingon", "Barangay I (Poblacion)", "Barangay II (Poblacion)",
+      "Barangay III (Poblacion)", "Barangay IV (Poblacion)", "Bicas-bicas",
+      "Caigangan", "Daykitin", "Libas", "Malbog", "Sihi", "Timbo (Sanggulong)",
+      "Tungib-Lipata", "Yook"
+    ]
+  },
+  "Gasan": {
+    zip: "4905",
+    barangays: [
+      "Antipolo", "Bachao Ibaba", "Bachao Ilaya", "Bacong-Bacong", "Bahi",
+      "Bangbang", "Banot", "Banuyo", "Bognuyan", "Cabugao", "Dawis", "Dili",
+      "Libtangin", "Mahunig", "Mangiliol", "Masiga", "Matandang Gasan", "Pangi",
+      "Pinggan", "Tabionan", "Tapuyan", "Tiguion", "Barangay I (Poblacion)",
+      "Barangay II (Poblacion)", "Barangay III (Poblacion)"
+    ]
+  },
+  "Mogpog": {
+    zip: "4901",
+    barangays: [
+      "Anapog-Sibucao", "Argao", "Balanacan", "Banto", "Bintakay", "Bocboc",
+      "Butansapa", "Candahon", "Capayang", "Danao", "Dulong Bayan (Poblacion)",
+      "Gitnang Bayan (Poblacion)", "Guisian", "Hinadharan", "Hinanggayon", "Ino",
+      "Janagdong (Planned Poblacion Expansion)", "Lamesa", "Laon", "Magapua",
+      "Malayak", "Malusak", "Mampaitan", "Mangyan-Mababad", "Market Site (Poblacion)",
+      "Mataas Na Bayan (Poblacion)", "Mendez", "Nangka I (Planned Poblacion Expansion)",
+      "Nangka II", "Paye", "Pili", "Puting Buhangin", "Sayao", "Silangan",
+      "Sumangga", "Tarug", "Villa Mendez (Poblacion)"
+    ]
+  },
+  "Santa Cruz": {
+    zip: "4902",
+    barangays: [
+      "Alobo", "Angas", "Aturan", "Bagong Silang Poblacion (2nd Zone)", "Baguidbirin",
+      "Baliis", "Balogo", "Banahaw Poblacion (3rd Zone)", "Bangcuangan", "Banogbog",
+      "Biga", "Botilao", "Buyabod", "Dating Bayan", "Devilla", "Dolores", "Haguimit",
+      "Hupi", "Ipil", "Jolo", "Kaganhao", "Kalangkang", "Kamandugan", "Kasily",
+      "Kilo-kilo", "Kinyaman", "Labo", "Lamesa", "Landy (Perez)",
+      "Lapu-lapu Poblacion (5th Zone)", "Libjo", "Lipa", "Lusok",
+      "Maharlika Poblacion (1st Zone)", "Makulapnit", "Maniwaya", "Manlibunan",
+      "Masaguisi", "Masalukot", "Matalaba", "Mongpong", "Morales", "Napo (Malabon)",
+      "Pag-Asa Poblacion (4th Zone)", "Pantayin", "Polo", "Pulong-Parang", "Punong",
+      "San Antonio", "San Isidro", "Tagum", "Tamayo", "Tambangan", "Tawiran", "Taytay"
+    ]
+  },
+  "Torrijos": {
+    zip: "4903",
+    barangays: [
+      "Bangwayin", "Bayakbakin", "Bolo", "Bonliw", "Buangan", "Cabuyo", "Cagpo",
+      "Dampulan", "Kay Duke", "Mabuhay", "Makawayan", "Malibago", "Malinao",
+      "Maranlig", "Marlangga", "Matuyatuya", "Nangka", "Pakaskasan", "Payanas",
+      "Poblacion", "Poctoy", "Sibuyao", "Suha", "Talawan", "Tigwi"
+    ]
+  }
+}
+
 interface VendorProfile {
   id: string
   businessName: string
@@ -75,7 +150,16 @@ export default function VendorProfilePage() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    setFormData(prev => {
+      const updated = { ...prev, [name]: value }
+      if (name === 'municipality') {
+        updated.barangay = ''
+        if (MARINDUQUE_DATA[value as keyof typeof MARINDUQUE_DATA]) {
+          updated.zipCode = MARINDUQUE_DATA[value as keyof typeof MARINDUQUE_DATA].zip
+        }
+      }
+      return updated
+    })
     setHasUnsavedChanges(true)
   }
 
@@ -202,6 +286,10 @@ export default function VendorProfilePage() {
 
   const inputClass = "w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#1e4d2b] focus:border-transparent transition-all bg-gray-50/50"
   const labelClass = "text-xs font-semibold text-gray-600 block mb-1.5 uppercase tracking-wider"
+
+  const availableBarangays = formData.municipality && MARINDUQUE_DATA[formData.municipality as keyof typeof MARINDUQUE_DATA] 
+    ? [...MARINDUQUE_DATA[formData.municipality as keyof typeof MARINDUQUE_DATA].barangays].sort((a, b) => a.localeCompare(b))
+    : []
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">
@@ -355,20 +443,50 @@ export default function VendorProfilePage() {
                       <input name="address" value={formData.address || ''} onChange={handleInputChange} required className={inputClass} />
                     </div>
                     <div>
-                      <label className={labelClass}>Barangay</label>
-                      <input name="barangay" value={formData.barangay || ''} onChange={handleInputChange} required className={inputClass} />
+                      <label className={labelClass}>Municipality</label>
+                      <select 
+                        name="municipality" 
+                        value={formData.municipality || ''} 
+                        onChange={handleInputChange} 
+                        required 
+                        className={inputClass}
+                      >
+                        <option value="">Select Municipality</option>
+                        {Object.keys(MARINDUQUE_DATA).map(mun => (
+                          <option key={mun} value={mun}>{mun}</option>
+                        ))}
+                      </select>
                     </div>
                     <div>
-                      <label className={labelClass}>Municipality</label>
-                      <input name="municipality" value={formData.municipality || ''} onChange={handleInputChange} required className={inputClass} />
+                      <label className={labelClass}>Barangay</label>
+                      <select 
+                        name="barangay" 
+                        value={formData.barangay || ''} 
+                        onChange={handleInputChange} 
+                        required 
+                        disabled={!formData.municipality}
+                        className={`${inputClass} disabled:opacity-50`}
+                      >
+                        <option value="">Select Barangay</option>
+                        {availableBarangays.map(brgy => (
+                          <option key={brgy} value={brgy}>{brgy}</option>
+                        ))}
+                      </select>
                     </div>
                     <div>
                       <label className={labelClass}>Province</label>
-                      <input name="province" value={formData.province || ''} onChange={handleInputChange} required className={inputClass} />
+                      <select
+                        name="province"
+                        value="Marinduque"
+                        disabled
+                        className={`${inputClass} disabled:opacity-50`}
+                      >
+                        <option>Marinduque</option>
+                      </select>
                     </div>
                     <div>
                       <label className={labelClass}>Zip Code</label>
-                      <input name="zipCode" value={formData.zipCode || ''} onChange={handleInputChange} required className={inputClass} />
+                      <input name="zipCode" value={formData.zipCode || ''} readOnly className={`${inputClass} disabled:opacity-50`} />
                     </div>
                   </div>
                 </div>
