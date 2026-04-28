@@ -397,7 +397,7 @@ export default function SignUpPage() {
             <div className={`space-y-4 absolute w-full transition-all duration-500 ease-in-out ${step === 3 ? 'translate-x-0 opacity-100 relative' : step > 3 ? '-translate-x-full opacity-0' : 'translate-x-full opacity-0'}`}>
               <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Step 3: Address (Marinduque Only)</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {field('address', 'Street / House No.')}
+                {field('address', 'Street / House No.', 'text', 'e.g. 123 Rizal St.')}
                 
                 {/* Province (Fixed) */}
                 <div>
