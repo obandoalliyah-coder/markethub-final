@@ -13,6 +13,8 @@ interface Stats {
   pendingApplications: number
   pendingPayments: number
   verifiedPayments: number
+  overduePayments: number
+  overdueStalls: number
   totalRevenue: number
 }
 
@@ -83,10 +85,11 @@ export default function AdminDashboard() {
   }, [])
 
   const availableStalls = (stats?.totalStalls || 0) - (stats?.occupiedStalls || 0)
-  const overdueStalls = 0 // extend later
+  const overdueStalls = stats?.overdueStalls || 0
+  const occupiedGoodStanding = Math.max(0, (stats?.occupiedStalls || 0) - overdueStalls)
 
   const donutData = [
-    { name: 'Occupied', value: stats?.occupiedStalls || 0, color: '#1e4d2b' },
+    { name: 'Occupied', value: occupiedGoodStanding, color: '#1e4d2b' },
     { name: 'Available', value: availableStalls, color: '#86efac' },
     { name: 'Overdue', value: overdueStalls, color: '#ef4444' },
   ]
@@ -141,7 +144,7 @@ export default function AdminDashboard() {
           </div>
           <div>
             <p className="text-xs text-gray-500 font-medium">Overdue Payments</p>
-            <p className="text-3xl font-bold text-gray-800">{overdueStalls}</p>
+            <p className="text-3xl font-bold text-gray-800">{stats?.overduePayments || 0}</p>
           </div>
         </div>
       </div>

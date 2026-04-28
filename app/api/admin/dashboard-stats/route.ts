@@ -37,6 +37,20 @@ export async function GET() {
       where: { status: 'VERIFIED' },
     })
 
+    const overduePayments = await prisma.payment.count({
+      where: { status: 'OVERDUE' },
+    })
+
+    const overdueStalls = await prisma.stall.count({
+      where: {
+        payments: {
+          some: {
+            status: 'OVERDUE'
+          }
+        }
+      }
+    })
+
     // Get total revenue
     const payments = await prisma.payment.findMany({
       where: { status: 'VERIFIED' },
@@ -53,6 +67,8 @@ export async function GET() {
       occupiedStalls,
       pendingPayments,
       verifiedPayments,
+      overduePayments,
+      overdueStalls,
       totalRevenue,
     })
   } catch (error) {
