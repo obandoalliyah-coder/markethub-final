@@ -22,6 +22,7 @@ export default function AdminReportsPage() {
   const [type, setType] = useState('monthly')
   const [summary, setSummary] = useState<Summary | null>(null)
   const [monthly, setMonthly] = useState<MonthlyPoint[]>([])
+  const [payments, setPayments] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [customStart, setCustomStart] = useState('')
   const [customEnd, setCustomEnd] = useState('')
@@ -36,6 +37,7 @@ export default function AdminReportsPage() {
       const data = await res.json()
       setSummary(data.summary)
       setMonthly(data.monthlyRevenue || [])
+      setPayments(data.payments || [])
     }
     setLoading(false)
   }
@@ -76,6 +78,37 @@ export default function AdminReportsPage() {
       wsTypes.addRow(['Type', 'Amount'])
       Object.entries(summary.paymentTypeBreakdown).forEach(([k, v]) => {
         wsTypes.addRow([k, v])
+      })
+    }
+
+    // Sheet 4: Payment History
+    if (payments && payments.length > 0) {
+      const wsHistory = workbook.addWorksheet('Payment History')
+      wsHistory.addRow([
+        'Transaction ID',
+        'Business Name',
+        'Stall Number',
+        'Amount',
+        'Status',
+        'Payment Type',
+        'Due Date',
+        'Date Paid',
+        'Verification Date',
+        'Created At'
+      ])
+      payments.forEach((p: any) => {
+        wsHistory.addRow([
+          p.id,
+          p.vendor?.businessName || '',
+          p.stall?.stallNumber || '',
+          p.amount,
+          p.status,
+          p.paymentType,
+          new Date(p.dueDate).toLocaleDateString(),
+          p.paidDate ? new Date(p.paidDate).toLocaleString() : '',
+          p.verificationDate ? new Date(p.verificationDate).toLocaleString() : '',
+          new Date(p.createdAt).toLocaleString()
+        ])
       })
     }
 
