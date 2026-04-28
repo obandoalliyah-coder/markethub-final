@@ -82,6 +82,43 @@ async function main() {
       }
     })
 
+    // 1. Verified Payment (Last Month)
+    const lastMonth = new Date()
+    lastMonth.setMonth(lastMonth.getMonth() - 1)
+    await prisma.payment.create({
+      data: {
+        vendorId: profile.id,
+        stallId: stall.id,
+        applicationId: application.id,
+        amount: 2000,
+        dueDate: lastMonth,
+        paidDate: new Date(lastMonth.getTime() + 2 * 24 * 60 * 60 * 1000), // Paid 2 days later
+        verificationDate: new Date(lastMonth.getTime() + 3 * 24 * 60 * 60 * 1000), // Verified 3 days later
+        status: 'VERIFIED',
+        paymentType: 'MONTHLY',
+        month: lastMonth.getMonth() + 1,
+        year: lastMonth.getFullYear(),
+      }
+    })
+    
+    // 2. Overdue Payment (2 Months Ago)
+    const twoMonthsAgo = new Date()
+    twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 2)
+    await prisma.payment.create({
+      data: {
+        vendorId: profile.id,
+        stallId: stall.id,
+        applicationId: application.id,
+        amount: 2000,
+        dueDate: twoMonthsAgo,
+        status: 'OVERDUE',
+        paymentType: 'MONTHLY',
+        month: twoMonthsAgo.getMonth() + 1,
+        year: twoMonthsAgo.getFullYear(),
+      }
+    })
+
+    // 3. Pending/Submitted Payment (Current Month)
     await prisma.payment.create({
       data: {
         vendorId: profile.id,
@@ -89,25 +126,10 @@ async function main() {
         applicationId: application.id,
         amount: 2000,
         dueDate: new Date(),
-        paidDate: new Date(),
-        status: 'VERIFIED',
+        paidDate: new Date(), // Submitted today
+        status: 'SUBMITTED',
         paymentType: 'MONTHLY',
         month: new Date().getMonth() + 1,
-        year: new Date().getFullYear(),
-      }
-    })
-    
-    // Add an overdue payment
-    await prisma.payment.create({
-      data: {
-        vendorId: profile.id,
-        stallId: stall.id,
-        applicationId: application.id,
-        amount: 2000,
-        dueDate: new Date(new Date().setMonth(new Date().getMonth() - 1)),
-        status: 'OVERDUE',
-        paymentType: 'MONTHLY',
-        month: new Date().getMonth(),
         year: new Date().getFullYear(),
       }
     })
